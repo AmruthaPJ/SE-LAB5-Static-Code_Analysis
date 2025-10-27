@@ -1,8 +1,7 @@
-Inventory System Issue Report
-
-| Issue | Type | Line(s) | Description | Fix Approach |
+| Issue Type | Line(s) | Description | Fix Approach |
+|---|---|---|---|
 | Use of eval() | Security (Medium) | 59 | Bandit (B307) & Pylint (W0123) flagged eval(), which is a security risk that can execute arbitrary code. | Delete line 59 (eval("print('eval used')")). |
-| Dangerous Default Value | Bug | 8 | Pylint (W0102) flagged a mutable list ([]) as a default argument. This single list is shared across all function calls. | 1. Change signature to logs=None.   2. Add if logs is None: logs = [] as the first line in the function. |
+| Dangerous Default Value | Bug | 8 | Pylint (W0102) flagged a mutable list ([]) as a default argument. This single list is shared across all function calls. | 1. Change signature to logs=None.<br>2. Add if logs is None: logs = [] as the first line in the function. |
 | Bare except / try...pass | Bug (Low) | 19-20 | Pylint (W0702), Flake8 (E722), & Bandit (B110) flagged a bare except:, which hides all errors. | Change except: on line 19 to the specific exception: except KeyError:. |
 | Unused Import | Code Quality | 2 | Pylint (W0611) & Flake8 (F401) flagged import logging as unused. | Delete line 2 (import logging). |
 | No with for file I/O | Code Quality | 26, 32 | Pylint (R1732) flagged open() being used without a with statement, which can lead to resource leaks. | Rewrite loadData and saveData to use with open(...) as f: and remove f.close(). |
